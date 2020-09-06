@@ -31,7 +31,7 @@ const jsx = (
   <div id="demo" style={{ color: 'red', border: '1px solid blue' }}>
     <span>hi</span>
     <Comp name="函数组件"></Comp>
-    {/* <Comp2 name="类组件"></Comp2> */}
+    <Comp2 name="类组件"></Comp2>
     {/* <ul>
       {users.map((user) => (
         <li key={user.name}>{user.name}</li>

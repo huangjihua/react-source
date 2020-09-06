@@ -7,10 +7,10 @@ import { initVNode } from './vdom';
  * @param {Element} container  挂载容器
  */
 function render(vnode, container) {
-  container.innerHTML = `<pre>${JSON.stringify(vnode, null, 2)}</pre>`;
-  // const node = initVNode(vnode);
-  // container.appendChild(node);
-  // console.log(JSON.stringify(vnode, null, 2));
+  // container.innerHTML = `<pre>${JSON.stringify(vnode, null, 2)}</pre>`;
+  const node = initVNode(vnode);
+  container.appendChild(node);
+  console.log(JSON.stringify(vnode, null, 2));
 }
 
 export default { render };
