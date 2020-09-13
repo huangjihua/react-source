@@ -3,6 +3,7 @@
 import React, { Component } from './react';
 import ReactDOM from './react-dom';
 // import ReactDOM from 'react-dom';
+import './redux/rudex.test';
 
 function Comp(props) {
   return <h2>hi {props.name}</h2>;
@@ -32,11 +33,11 @@ const jsx = (
     <span>hi</span>
     <Comp name="函数组件"></Comp>
     <Comp2 name="类组件"></Comp2>
-    {/* <ul>
+    <ul>
       {users.map((user) => (
         <li key={user.name}>{user.name}</li>
       ))}
-    </ul> */}
+    </ul>
   </div>
 );
 
