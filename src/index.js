@@ -1,6 +1,6 @@
 // import React from 'react'
 // import ReactDOM from 'react-dom';
-
+// import Demo from './demo/demo1';
 import React,{Component} from './react'
 import ReactDOM from './react-dom';
 
@@ -28,8 +28,9 @@ const users = [
 
 // vdom 
 const jsx  = (
-  <div id="demo" style={{color:"red",border:'1px solid blue'}}>
-    <span>hi</span>
+  <div id="demo" style={{color:"red",border:'1px solid blue'}} onClick={() => alert('click')}>
+    <span htmlFor="">hi</span>
+    <i></i>
     <Comp name="函数组件"></Comp>
     <Comp2 name="类组件"></Comp2>
     <ul>

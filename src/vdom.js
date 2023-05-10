@@ -1,8 +1,8 @@
 // vdom 转换为dom
 // diff
+
 /**
- *
- *
+ * 生成VNode
  * @export
  * @param {Number} vtype 元素的类型，1-html元素，2-function组件，3-class组件
  * @param {*} type 标签元素类型
@@ -10,7 +10,7 @@
  */
 export function createVNode(vtype,type,props){
   const vnode = {vtype,type,props};
-
+  // console.log('vnode',vnode)
   return vnode;
 }
 /**
@@ -44,12 +44,14 @@ export function initVNode(vnode){
  * @returns
  */
 function createElement(vnode) {
+  console.log('default-vnode:',vnode)
   // 根据type创建元素
   const {type,props} = vnode;
   const node  = document.createElement(type); 
   
   // 处理属性,  原生自定义属性,特殊属性children
   const  {key,children,...rest} = props
+
   Object.keys(rest).forEach(k => {
     // 处理JSX里特殊属性名： className, htmlFor
     if(k === 'className') {
@@ -60,6 +62,12 @@ function createElement(vnode) {
       // 内联 style用js写法的处理 ,这里就比较多了，这里就些了正常情况，如果font-size这样就不行
      const style =  Object.keys(rest[k]).map(s => `${s}:${rest[k][s]}`).join(';')
       node.setAttribute('style',style)
+
+    } else if(k.startsWith('on')){
+      // 也可以处理事件，很多种实现，答案不是千变一律的
+       //test  onClick
+      const event  = k.toLowerCase();
+      node[event] = rest[k]  // rest =>callback
     } else {
       node.setAttribute(k,rest[k])
     }
@@ -67,7 +75,7 @@ function createElement(vnode) {
   // 递归子元素,// children父节点=> node
   children.forEach(c => {
     console.log('children',c)
-    // 如果子元素是个数组，改怎么处理
+    // 如果子元素是个数组，改怎么处理 => 处理循环的
     if(Array.isArray(c)) {
       c.map(el => {
         node.appendChild(initVNode(el))
@@ -87,6 +95,7 @@ function createElement(vnode) {
  */
 function createClassComponent(vnode) {
   
+  console.log('class-vnode:',vnode)
   //根据类组件看， type是class 组件声明
   const {type,props} = vnode;
   const  component = new type(props);
@@ -100,6 +109,7 @@ function createClassComponent(vnode) {
  * @returns
  */
 function createFunComponent(vnode) {
+  console.log('function-vnode:',vnode)
   // type是函数
   const {type,props} = vnode;
   const  vdom = type(props);
