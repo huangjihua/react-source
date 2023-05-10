@@ -13,20 +13,21 @@ function createElement(type,props,...children){
   delete props.__self
   // type: 标签类型，如div
   // vtype :组件类型
-  let vtype; 
-  if(typeof type === 'string'){
+  let vtype;
+  if (typeof type === 'string') {
     // 原生组件
-    vtype = 1
-  }else if(typeof type === 'function'){
-    if(type.isClassComponent){
+    vtype = 1;
+  } else if (typeof type === 'function') {
+    if (type.isClassComponent) {
       // 类组件
-      vtype = 2
-    }else{
-       // 函数组件
-      vtype = 3
+      vtype = 2;
+    } else {
+      // 函数组件
+      vtype = 3;
     }
   }
-  return createVNode(vtype,type,props)
+  // return { type, props };
+  return createVNode(vtype, type, props); // 加工处理
 }
 
 export default { createElement }
